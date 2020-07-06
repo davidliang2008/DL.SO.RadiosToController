@@ -1,0 +1,76 @@
+﻿@using PartActionType = DL.SO.RadiosToController.WebUI.Models.Item.PartActionType
+@model DL.SO.RadiosToController.WebUI.Models.Item.ItemViewModel
+@{
+    ViewBag.Title = "Items";
+
+    var partActionTypes = Enum.GetValues(typeof(PartActionType));
+}
+
+<h3>Items Being Converted</h3>
+@using (Html.BeginForm("save", "item", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(x => x.ItemId)
+
+    <table class="table table-sm text-center">
+        <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>MFG ID</th>
+                <th>Item Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.ItemId</td>
+                <td>@Model.MFGNumber</td>
+                <td>@Model.ItemName</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h5>Parts In Items (@Model.Parts.Count)</h5>
+
+    <table class="table table-sm text-center">
+        <thead>
+            <tr>
+                <th>Part ID</th>
+                <th>MFG ID</th>
+                <th>Part Name</th>
+
+                <!-- I'm displaying the names for the num dynamically.-->
+                @foreach (var actionType in partActionTypes)
+                {
+                    <th>@Enum.GetName(typeof(PartActionType), actionType)</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Parts.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(x => x.Parts[i].PartId)
+                        @Html.HiddenFor(x => x.Parts[i].PartId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => x.Parts[i].MFGNumber)
+                        @Html.HiddenFor(x => x.Parts[i].MFGNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => x.Parts[i].PartName)
+                        @Html.HiddenFor(x => x.Parts[i].PartName)
+                    </td>
+                    @foreach (var actionType in partActionTypes)
+                    {
+                        <td>
+                            @Html.RadioButtonFor(x => x.Parts[i].SelectedActionType, actionType)
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button class="btn btn-success" type="submit">Save</button>
+}
