@@ -22,24 +22,41 @@ namespace DL.SO.RadiosToController.WebUI.Controllers
 					new ItemPartViewModel
 					{
 						PartId = 1,
-						PartName = "Part 1"
+						PartName = "Part 1",
+						SelectedActionType = PartActionType.Transfer
 					},
 					new ItemPartViewModel
 					{
 						PartId = 2,
-						PartName = "Part 2"
+						PartName = "Part 2",
+						SelectedActionType = PartActionType.Transfer
 					},
 					new ItemPartViewModel
 					{
 						PartId = 3,
-						PartName = "Part 3"
+						PartName = "Part 3",
+						SelectedActionType = PartActionType.Transfer
 					},
 					new ItemPartViewModel
 					{
 						PartId = 4,
-						PartName = "Part 4"
+						PartName = "Part 4",
+						SelectedActionType = PartActionType.Transfer
 					}
-				}
+				},
+                AvailableItemOptions = new List<ItemOptionViewModel>
+                {
+                    new ItemOptionViewModel
+                    {
+                        ItemInstanceId = 123,
+                        ItemInstanceName = "Fake Item"
+                    },
+                    new ItemOptionViewModel
+                    {
+                        ItemInstanceId = 124,
+                        ItemInstanceName = "Another Fake Item"
+                    }
+                }
 			};
 
 			return View(vm);

@@ -16,5 +16,7 @@ namespace DL.SO.RadiosToController.WebUI.Models.Item
         public string MFGNumber { get; set; }
 
         public IList<ItemPartViewModel> Parts { get; set; }
+
+        public IEnumerable<ItemOptionViewModel> AvailableItemOptions { get; set; }
     }
 }

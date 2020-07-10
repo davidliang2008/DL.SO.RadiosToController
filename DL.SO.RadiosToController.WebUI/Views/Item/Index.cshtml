@@ -72,5 +72,9 @@
             }
         </tbody>
     </table>
+
+    @Html.DropDownList("selected-item-id", 
+        new SelectList(Model.AvailableItemOptions, "ItemInstanceId", "ItemInstanceName", Model.ItemId), "- select -", new { @class = "form-control chosen-select" })
+
     <button class="btn btn-success" type="submit">Save</button>
 }
